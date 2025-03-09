@@ -1,5 +1,7 @@
-# Название сценария
+# Миграция сервисов с балансировщика NLB с целевыми ресурсами из кластера Yandex Managed Service for Kubernetes на L7-балансировщик ALB с помощью Terraform
 
-Описание сценария и инструкция по его применению.
+Сервисы могут быть развернуты в Yandex Cloud с использованием балансировщика [Yandex Network Load Balancer](https://yandex.cloud/ru/docs/network-load-balancer) (NLB), который распределяет трафик по облачным ресурсам. Сетевой балансировщик может быть использован в составе сервисов внутри кластера [Yandex Managed Service for Kubernetes](https://yandex.cloud/ru/docs/managed-kubernetes). Кластер самостоятельно создает объекты сетевого балансировщика в соответствии с предоставленными манифестами и следит за составом целевой группы балансировщика, куда попадают виртуальные машины (ВМ) из групп узлов этого кластера.
 
-Для практических руководств обязательна ссылка на документацию.
+Для защиты таких сервисов от DDoS-атак и ботов на уровне приложений (L7) с помощью [Yandex Smart Web Security](https://yandex.cloud/ru/docs/smartwebsecurity) потребуется мигрировать сервис с сетевого балансировщика на L7-балансировщик [Yandex Application Load Balancer](https://yandex.cloud/ru/docs/application-load-balancer) (ALB), который создается Ingress-контроллером Application Load Balancer, развернутым в кластере Managed Service for Kubernetes.
+
+Подготовка инфраструктуры через Terraform описана в [практическом руководстве](https://yandex.cloud/ru/docs/tutorials/security/migration-from-nlb-to-alb/nlb-with-target-resource-k8s/terraform). Необходимые для настройки конфигурационные файлы [alb-k8s-http.tf](alb-k8s-http.tf) и [alb-k8s-https.tf](alb-k8s-https.tf) расположены в этом репозитории.
